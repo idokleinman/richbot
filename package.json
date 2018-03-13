@@ -1,0 +1,16 @@
+{
+  "name": "idobot",
+  "version": "1.0.0",
+  "description": "signal/TA trading bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^5.0.1",
+    "node-bittrex-api": "^0.8.3"
+  }
+}
