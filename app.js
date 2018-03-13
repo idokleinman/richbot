@@ -9,7 +9,7 @@ console.log('welcome');
 var bc = new BittrexController();
 var mh = new MiningHamsterController();
 
-bc.getMarketSummaries();
+// bc.getMarketSummaries();
 // bc.getCandles('BTC-ETH','fiveMin');
 
 
@@ -19,7 +19,21 @@ function loopGetSignals() {
 	// do whatever you like here
 	console.log('---');
 
-	mh.getSignal();
+	mh.getSignal().then((signal) => {
+		console.log(signal[0]);
+		// calculate time since signal
+		mh.timeSinceSignal(signal[0]);
+		// , if its < 1 min then simulate buy
+		// add signal ID / buy price to memory (hash)
+		// simulate buy
+		// track price of ticker
+		// if above 2% simulate sell
+		// print report
+		// future: add checking of RSI, binance
+
+	});
+
+
 	setTimeout(loopGetSignals, 2000);
 }
 

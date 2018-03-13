@@ -13,6 +13,8 @@
     "axios": "^0.18.0",
     "bluebird": "^3.5.1",
     "dotenv": "^5.0.1",
+    "moment": "^2.21.0",
+    "moment-timezone": "^0.5.14",
     "node-bittrex-api": "^0.8.3"
   }
 }
