@@ -3,10 +3,11 @@
 require('dotenv').config();
 const BittrexController = require('./lib/BittrexController');
 const MiningHamsterController = require('./lib/MiningHamsterController');
+const PositionsManager = require('./lib/PositionsManager');
 
-console.log('welcome');
+console.log('Welcome to RichBot');
 
-var bc = new BittrexController();
+// var bc = new BittrexController();
 var mh = new MiningHamsterController();
 
 // bc.getMarketSummaries();
