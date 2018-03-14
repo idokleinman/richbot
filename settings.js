@@ -13,7 +13,7 @@ const settings = {
 
 	trade : {
 		simulated_trading : true, // if true no real buy/sells will happen
-		trade_on_exchanges : ['bittrex'], //, 'binance'],
+		active_exchanges : ['bittrex'], //, 'binance'],
 		strategy : ['mh_signals'], // , 'rsi'],
 
 		// Loss handling
@@ -38,7 +38,7 @@ const settings = {
 		max_time_open_orders : 600,
 
 		// budgeting
-		base_assets : ['btc'], // don't do eth or usdt trading for now (*)
+		base_assets : ['BTC'], // don't do eth or usdt trading for now (*)
 		total_btc_to_trade : 0.5, // total BTC value to assign for bot
 		total_eth_to_trade : 0, // future
 		total_usdt_to_trade : 0, // future

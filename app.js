@@ -4,12 +4,13 @@ require('dotenv').config();
 const BittrexController = require('./lib/BittrexController');
 const MiningHamsterController = require('./lib/MiningHamsterController');
 const PositionsManager = require('./lib/PositionsManager');
+const settings = require('settings');
 
-console.log('Welcome to RichBot');
+
 
 // var bc = new BittrexController();
 var mh = new MiningHamsterController();
-
+var pm = new PositionsManager();
 // bc.getMarketSummaries();
 // bc.getCandles('BTC-ETH','fiveMin');
 
@@ -20,10 +21,17 @@ function loopGetSignals() {
 	// do whatever you like here
 	console.log('---');
 
-	mh.getSignal().then((signal) => {
-		console.log(signal[0]);
+	mh.getSignal().then((signals) => {
+		let signal = signals[0];
+		console.log(signal);
 		// calculate time since signal
-		mh.timeSinceSignal(signal[0]);
+		let timeSinceSignal = mh.timeSinceSignal(signal);
+		if ((timeSinceSignal < settings.trade.max_signal_time_diff_to_buy) && (timeSinceSignal > settings.trade.min_time_diff_to_buy)) {
+			pm.enter(signal);
+		}
+
+
+
 		// , if its < 1 min then simulate buy
 		// add signal ID / buy price to memory (hash)
 		// simulate buy
@@ -38,7 +46,15 @@ function loopGetSignals() {
 	setTimeout(loopGetSignals, 2000);
 }
 
+console.log('Welcome to RichBot');
 loopGetSignals();
+
+// TODO:
+// add express.js to serve  GET webpage with report, GET status of a position, POST new trading parameters/outside signal (future)
+// add DB for positions monitoring
+// Binance API support
+
+
 
 
 
