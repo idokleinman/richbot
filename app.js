@@ -1,11 +1,14 @@
 'use strict';
 
-require('dotenv').config();
+
 // const BittrexController = require('./lib/BittrexController');
 const MiningHamsterController = require('./lib/MiningHamsterController');
 const PositionsManager = require('./lib/PositionsManager');
 const settings = require('./settings');
 
+// TODO: move to DatabaseManager
+const mongoose = require('mongoose');
+const Position = require('./lib/models/Position');
 
 
 // var bc = new BittrexController();
@@ -13,6 +16,22 @@ var mh = new MiningHamsterController();
 var pm = new PositionsManager();
 // bc.getMarketSummaries();
 // bc.getCandles('BTC-ETH','fiveMin');
+
+// database connect placeholder
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+	console.log(`we're connected!`);
+});
+mongoose.connect(settings.mongodb.connection_string);
+var position = new Position({
+	uuid: '12345',
+	coin: 'LTC',
+	baseAsset: 'BTC'
+});
+
+position.save();
+
 
 
 mh.getTestSignal();

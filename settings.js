@@ -1,10 +1,18 @@
 'use strict';
 
+require('dotenv').config();
 // all times given in seconds
 
-const settings = {
-	bittrex : {
+let mongo_pwd = encodeURI(process.env.MONGODB_PASSWORD);
 
+const settings = {
+	mongodb: {
+		connection_string : `mongodb://${process.env.MONGODB_USERNAME}:${mongo_pwd}@ds115219.mlab.com:15219/richbot`
+	},
+
+	bittrex : {
+		api_key : process.env.BITTREX_API_KEY,
+		api_secret : process.env.BITTREX_API_SECRET
 	},
 
 	report : {
@@ -50,6 +58,7 @@ const settings = {
 
 	mh_signals : {
 		base_url : 'https://mininghamster.com/api/v2/',
+		api_key : process.env.MININGHAMSTER_API_KEY,
 
 		polling_interval : 30,
 		signal_time_signature_utc_diff_string : 'UTC+0100',
