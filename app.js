@@ -1,10 +1,10 @@
 'use strict';
 
 require('dotenv').config();
-const BittrexController = require('./lib/BittrexController');
+// const BittrexController = require('./lib/BittrexController');
 const MiningHamsterController = require('./lib/MiningHamsterController');
 const PositionsManager = require('./lib/PositionsManager');
-const settings = require('settings');
+const settings = require('./settings');
 
 
 
@@ -43,7 +43,7 @@ function loopGetSignals() {
 	});
 
 
-	setTimeout(loopGetSignals, 2000);
+	setTimeout(loopGetSignals, 5000);
 }
 
 console.log('Welcome to RichBot');
