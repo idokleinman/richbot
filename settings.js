@@ -24,6 +24,7 @@ const settings = {
 		simulated_trading : true, // if true no real buy/sells will happen
 		active_exchanges : ['bittrex'], //, 'binance'],
 		strategy : ['mh_signals'], // , 'rsi'],
+		coin_blacklist : ['VOX', 'CHAT'],
 
 		// Loss handling
 		stop_loss_enabled : true,
@@ -54,6 +55,7 @@ const settings = {
 		max_open_positions : 10, // maximum number of positions to keep open, after this amount of open positions new signals will be ignored till positions are closed
 		percentage_of_budget_per_position : 10, // assign X percent of the total btc to each position
 		min_btc_per_position: 0.01, // if not enough funds left in exchange - this is the min amount to open a new position, below that, signals are ignored
+
 
 	},
 
