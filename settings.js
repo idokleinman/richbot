@@ -12,7 +12,8 @@ const settings = {
 
 	bittrex : {
 		api_key : process.env.BITTREX_API_KEY,
-		api_secret : process.env.BITTREX_API_SECRET
+		api_secret : process.env.BITTREX_API_SECRET,
+		polling_interval : 60
 	},
 
 	report : {

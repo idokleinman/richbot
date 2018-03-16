@@ -17,21 +17,6 @@ var pm = new PositionsManager();
 // bc.getMarketSummaries();
 // bc.getCandles('BTC-ETH','fiveMin');
 
-// database connect placeholder
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-	console.log(`we're connected!`);
-});
-mongoose.connect(settings.mongodb.connection_string);
-var position = new Position({
-	uuid: '12345',
-	coin: 'LTC',
-	baseAsset: 'BTC'
-});
-
-position.save();
-
 
 
 mh.getTestSignal();
