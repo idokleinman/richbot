@@ -1,8 +1,8 @@
 {
-  "name": "idobot",
-  "version": "1.0.0",
-  "description": "signal/TA trading bot",
-  "main": "index.js",
+  "name": "richbot",
+  "version": "0.1.0",
+  "description": "Cryptocurrency signals/TA autotrading bot",
+  "main": "app.js",
   "scripts": {
     "test": "npm test",
     "start": "node app.js"
@@ -11,12 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
-    "bluebird": "^3.5.1",
     "dotenv": "^5.0.1",
     "moment": "^2.21.0",
     "moment-timezone": "^0.5.14",
     "mongoose": "^5.0.10",
     "node-bittrex-api": "^0.8.3",
+    "nodemon": "^1.17.2",
     "uuid": "^3.2.1"
   }
 }
