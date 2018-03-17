@@ -6,11 +6,6 @@ const MiningHamsterController = require('./lib/MiningHamsterController');
 const PositionsManager = require('./lib/PositionsManager');
 const settings = require('./settings');
 
-// TODO: move to DatabaseManager
-const mongoose = require('mongoose');
-const Position = require('./lib/models/Position');
-
-
 // var bc = new BittrexController();
 var mh = new MiningHamsterController();
 var pm = new PositionsManager();
@@ -19,35 +14,33 @@ var pm = new PositionsManager();
 
 
 
-mh.getTestSignal();
+// mh.getTestSignal();
 
-function loopGetSignals() {
+async function loopGetSignals() {
 	// do whatever you like here
 	console.log('---');
 
-	mh.getSignal().then((signals) => {
+	let signals = await mh.getSignal();
+	if (signals) {
 		let signal = signals[0];
-		console.log(signal);
+		// console.log(signal);
 		// calculate time since signal
 		let timeSinceSignal = mh.timeSinceSignal(signal);
-		if ((timeSinceSignal < settings.trade.max_signal_time_diff_to_buy) && (timeSinceSignal > settings.trade.min_time_diff_to_buy)) {
-			pm.enter(signal);
+		// if ((timeSinceSignal < settings.trade.max_signal_time_diff_to_buy) && (timeSinceSignal > settings.trade.min_time_diff_to_buy)) {
+		let uuid = await pm.enter(signal).catch((error) =>{
+			console.log(`${error}`);
+		});
+
+		if (uuid) {
+			console.log(`Enter position success: ${uuid}`);
 		}
+		// } else {
+		// 	console.log('Signal is out of enter time range');
+		// }
+	}
 
 
-
-		// , if its < 1 min then simulate buy
-		// add signal ID / buy price to memory (hash)
-		// simulate buy
-		// track price of ticker
-		// if above 2% simulate sell
-		// print report
-		// future: add checking of RSI, binance
-
-	});
-
-
-	setTimeout(loopGetSignals, 5000);
+	setTimeout(loopGetSignals, settings.mh_signals.polling_interval*1000);
 }
 
 console.log('Welcome to RichBot');
