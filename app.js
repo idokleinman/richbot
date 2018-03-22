@@ -5,6 +5,8 @@
 const MiningHamsterController = require('./lib/MiningHamsterController');
 const PositionsManager = require('./lib/PositionsManager');
 const settings = require('./settings');
+const death = require('death');
+// const _ = require('lodash');
 
 // var bc = new BittrexController();
 var mh = new MiningHamsterController();
@@ -15,6 +17,14 @@ var pm = new PositionsManager();
 
 
 // mh.getTestSignal();
+
+death(function(signal, err) {
+	pm.terminate();
+	process.exit();
+
+});
+
+
 
 async function loopGetSignals() {
 	// do whatever you like here

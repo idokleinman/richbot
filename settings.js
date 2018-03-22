@@ -63,7 +63,7 @@ const settings = {
 		base_url : 'https://mininghamster.com/api/v2/',
 		api_key : process.env.MININGHAMSTER_API_KEY,
 
-		polling_interval : 30,
+		polling_interval : 5, // 30 is ok
 		signal_time_signature_utc_diff_string : 'UTC+0100',
 
 
