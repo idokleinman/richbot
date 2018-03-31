@@ -26,26 +26,24 @@ const settings = {
 		strategy : ['mh_signals'], // , 'rsi'],
 		coin_blacklist : ['VOX', 'CHAT'],
 
-		// Loss handling
-		stop_loss_enabled : true,
-		stop_loss_percentage : 15,
-		trailing_stop_loss_arm_percentage : 1,
-		trailing_stop_loss_enabled : true,
-		trailing_stop_loss_percentage : 3,
+		// Stop Loss strategy
+		stop_loss_enabled : true,  // when enabled:
+		stop_loss_percentage : 15, // if position drops by X percent sell it immediately
 
-		// positions for signals
-		max_time_to_hold_signal_position : 7*24*60*60, // position will be sold at any value after this time (even at loss)
+		trailing_stop_loss_enabled : true, // sell_signal_at_profit will take precedence over this setting
+		trailing_stop_loss_arm_percentage : 1,  // rise by Y percent to arm the trailing stop loss mechanism
+		trailing_stop_loss_percentage : 3, // after position has risen by Y percent (above) and drops by X (this) percent, sell it
+
+		// positions strategy for signals
 		sell_signal_at_profit : true, // sell signal at profit, if true sell when reaches this profit, else use trailing stop_loss (trailing_stop_loss_enabled must be enabled)
 		sell_at_profit_percentage : 3, // sell when coin reaches 3% gain
 		buy_signal_above_max_percentage: 0.5, // buy coin for up to X percent above ask price
 
-		// positions timing
-		// max time that elapsed since the signal to trigger a buy (seconds) - after that signal is ignored
-		max_signal_time_diff_to_buy : 180,
-		// min time to wait after signal is given to trigger a buy for the signal (seconds), 0 for immediate action
-		min_time_diff_to_buy : 30,
-		// when to cancel open buy orders for signals (which probably went higher in price)
-		max_time_open_orders : 600,
+		// signal positions timing
+		max_signal_time_diff_to_buy : 180, // max time that elapsed since the signal to trigger a buy (seconds) - after that signal is ignored
+		min_time_diff_to_buy : 0, // min time to wait after signal is given to trigger a buy for the signal (seconds), 0 for immediate action
+		max_time_open_orders : 600, // when to cancel open buy orders for signals (which probably went higher in price)
+		max_time_to_hold_signal_position : 7*24*60*60, // position will be sold at any value after this time (even at loss)
 
 		// budgeting
 		base_assets : ['BTC'], // don't do eth or usdt trading for now (*)
@@ -65,8 +63,6 @@ const settings = {
 
 		polling_interval : 5, // 30 is ok
 		signal_time_signature_utc_diff_string : 'UTC+0100',
-
-
 
 		// buy_signal_condition with TA
 		// ..
