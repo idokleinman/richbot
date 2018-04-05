@@ -37,40 +37,42 @@ async function loopGetSignals() {
 		let signal = signals[0];
 		// calculate time since signal
 		let timeSinceSignal = mh.timeSinceSignal(signal);
+		process.stdout.write(`.`);
 		// debug disabled:
-		// if ((timeSinceSignal < settings.trade.max_signal_time_diff_to_buy) && (timeSinceSignal > settings.trade.min_time_diff_to_buy)) {
+		if ((timeSinceSignal < settings.trade.max_signal_time_diff_to_buy) && (timeSinceSignal > settings.trade.min_signal_time_diff_to_buy)) {
 
-		// console.log('got signal:');
+			// console.log('got signal:');
+			let signalHash = stringHash(signal.toString());
 
+			// console.log(`signal: ${signalHash}...last signal: ${lastSignalHash}`);
+			// console.log(signal);
 
-		let signalHash = stringHash(signal.toString());
+			if (signalHash !== lastSignalHash) {
+				console.log(`- New signal published ${signal}`);
+				let enterPosition = await pm.enter(signal).catch((error) => {
+					console.log(`${error}`);
+				});
 
-		// console.log(`signal: ${signalHash}...last signal: ${lastSignalHash}`);
-		// console.log(signal);
+				if (enterPosition) {
+					console.log(`- Enter position for new signal success at ${new Date()}`);
+				}
 
-		if (signalHash !== lastSignalHash) {
-			let uuid = await pm.enter(signal).catch((error) => {
-				console.log(`${error}`);
-			});
-
-			if (uuid) {
-				console.log(`Enter position success: ${uuid}`);
+				lastSignalHash = signalHash;
+			} else {
+				// NOP
+				// console.log(`- Success getting signal from MiningHamster (no action)`);
 			}
-
-			lastSignalHash = signalHash;
 		} else {
-			console.log(`- Success getting signal from MiningHamster (no action)`);
+			// NOP
+			// console.log('Signal is out of enter time range');
 		}
-		// } else {
-		// 	console.log('Signal is out of enter time range');
-		// }
 	}
 
 
 	setTimeout(loopGetSignals, settings.mh_signals.polling_interval*1000);
 }
 
-console.log('Welcome to RichBot');
+console.log('* Welcome to RichBot! Let\'s make some auto-money...');
 loopGetSignals();
 
 // TODO:
