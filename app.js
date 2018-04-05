@@ -37,18 +37,19 @@ async function loopGetSignals() {
 		let signal = signals[0];
 		// calculate time since signal
 		let timeSinceSignal = mh.timeSinceSignal(signal);
-		process.stdout.write(`.`);
-		// debug disabled:
-		if ((timeSinceSignal < settings.trade.max_signal_time_diff_to_buy) && (timeSinceSignal > settings.trade.min_signal_time_diff_to_buy)) {
+		// process.stdout.write(`.`);
+
+		// debug time check disabled:
+		// if ((timeSinceSignal < settings.trade.max_signal_time_diff_to_buy) && (timeSinceSignal > settings.trade.min_signal_time_diff_to_buy)) {
+		if (true) {
 
 			// console.log('got signal:');
 			let signalHash = stringHash(signal.toString());
 
-			// console.log(`signal: ${signalHash}...last signal: ${lastSignalHash}`);
-			// console.log(signal);
 
 			if (signalHash !== lastSignalHash) {
-				console.log(`- New signal published ${signal}`);
+				console.log(`- New signal published ${new Date()}`);
+				console.log(signal);
 				let enterPosition = await pm.enter(signal).catch((error) => {
 					console.log(`${error}`);
 				});
