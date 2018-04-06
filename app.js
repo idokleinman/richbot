@@ -40,16 +40,15 @@ async function loopGetSignals() {
 		// process.stdout.write(`.`);
 
 		// debug time check disabled:
-		// if ((timeSinceSignal < settings.trade.max_signal_time_diff_to_buy) && (timeSinceSignal > settings.trade.min_signal_time_diff_to_buy)) {
-		if (true) {
-
+		if ((timeSinceSignal < settings.trade.max_signal_time_diff_to_buy) && (timeSinceSignal > settings.trade.min_signal_time_diff_to_buy)) {
+		// if (true) {
 			// console.log('got signal:');
 			let signalHash = stringHash(signal.toString());
-
 
 			if (signalHash !== lastSignalHash) {
 				console.log(`- New signal published ${new Date()}`);
 				console.log(signal);
+				signal.time = mh.convertSignalTimeToIsoDate(signal);
 				let enterPosition = await pm.enter(signal).catch((error) => {
 					console.log(`${error}`);
 				});

@@ -30,7 +30,7 @@ const settings = {
 		stop_loss_enabled : true,  // when enabled:
 		stop_loss_percentage : 16, // if position drops by X percent sell it immediately
 
-		trailing_stop_loss_enabled : true, // sell_signal_at_profit will take precedence over this setting
+		trailing_stop_loss_enabled : false, // sell_signal_at_profit will take precedence over this setting
 		trailing_stop_loss_arm_percentage : 1,  // rise by Y percent to arm the trailing stop loss mechanism
 		trailing_stop_loss_percentage : 3, // after position has risen by Y percent (above) and drops by X (this) percent, sell it
 
