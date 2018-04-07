@@ -63,7 +63,7 @@ const settings = {
 		api_key : process.env.MININGHAMSTER_API_KEY,
 
 		polling_interval : 5, // 30 is ok
-		signal_time_signature_utc_diff_string : 'UTC+0100',
+		signal_time_signature_utc_diff_string : 'UTC+0200', // todo; check if 2 = ISR, 1 = US always or daylight saving time etc
 
 		// buy_signal_condition with TA
 		// ..
