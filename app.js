@@ -66,6 +66,10 @@ async function loopGetSignals() {
 		// calculate time since signal
 		let timeSinceSignal = mh.timeSinceSignal(signal);
 
+		if (timeSinceSignal < 0) {
+			logger.error(`Time difference from signal is negative - check timezone settings ("signal_time_signature_utc_diff_string")`);
+		}
+
 		// logger.debug(timeSinceSignal);
 		// process.stdout.write(`.`);
 
@@ -79,7 +83,9 @@ async function loopGetSignals() {
 				signal.time = mh.convertSignalTimeToIsoDate(signal);
 
 				let enterPosition = await _enterPositionOnSignal(signal, 5).catch((error) => {
-					logger.warn(`Could not enter position because: ${error}`);
+					if (error !== `Warning`) {
+						logger.warn(`Could not enter position because: ${error}`);
+					}
 				});
 
 				if (enterPosition) {
