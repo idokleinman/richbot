@@ -66,13 +66,12 @@ async function loopGetSignals() {
 		// calculate time since signal
 		let timeSinceSignal = mh.timeSinceSignal(signal);
 
-		logger.debug(timeSinceSignal);
+		// logger.debug(timeSinceSignal);
 		// process.stdout.write(`.`);
 
 		// debug time check disabled:
 		if ((timeSinceSignal < settings.trade.max_signal_time_diff_to_buy) && (timeSinceSignal >= settings.trade.min_signal_time_diff_to_buy)) {
 		// if (true) {
-			// console.log('got signal:');
 			let signalHash = stringHash(signal.toString());
 
 			if (signalHash !== lastSignalHash) {
@@ -80,7 +79,7 @@ async function loopGetSignals() {
 				signal.time = mh.convertSignalTimeToIsoDate(signal);
 
 				let enterPosition = await _enterPositionOnSignal(signal, 5).catch((error) => {
-					// logger.warn(`Could not enter position because: ${error}`);
+					logger.warn(`Could not enter position because: ${error}`);
 				});
 
 				if (enterPosition) {
