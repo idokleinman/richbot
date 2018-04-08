@@ -46,14 +46,21 @@ const settings = {
 		max_time_to_hold_signal_position : 7*24*60*60, // position will be sold at any value after this time (even at loss)
 
 		// budgeting
-		base_assets : ['BTC'], // don't do eth or usdt trading for now (*)
-		total_btc_to_trade : 0.5, // total max BTC value to assign for bot - bot will use less if less is available
-		total_eth_to_trade : 0, // future
-		total_usdt_to_trade : 0, // future
-		total_bnb_to_trade : 0, // future (binance only)
+		base_assets : ['BTC'], // don't do ETH or USDT or BNB trading for now (*)
+		total_to_trade : {
+			btc : 0.5, // total max BTC value to assign for bot - bot will use less if less is available
+			eth : 0,
+			usdt : 0,
+			bnb : 0, // binance only
+		},
 		max_open_positions : 10, // maximum number of positions to keep active, after this amount of open positions new signals will be ignored till positions are closed
 		percentage_of_budget_per_position : 10, // assign X percent of the total btc to each position
-		min_btc_per_position: 0.01, // if not enough funds left in exchange - this is the min amount to open a new position, below that, signals are ignored
+		min_per_position: {
+			btc : 0.01,
+			eth : 0.5,
+			usdt : 250,
+			bnb : 20,
+		}, // if not enough funds left in exchange - this is the min amount to open a new position, below that, signals are ignored
 
 
 	},
