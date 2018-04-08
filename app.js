@@ -34,7 +34,7 @@ async function _enterPositionOnSignal(signal, retryCounter) {
 
 		if (result.type === 'warn') {
 			logger.warn(result.msg);
-			return Promise.reject('Warning');
+			return Promise.reject('warn');
 		}
 
 		if (result.type === 'error') {
@@ -80,16 +80,16 @@ async function loopGetSignals() {
 
 			if (signalHash !== lastSignalHash) {
 				logger.debug(`New signal published ${JSON.stringify(signal)}`);
-				signal.time = mh.convertSignalTimeToIsoDate(signal);
+				signal.time = mh.convertSignalTimeToIsoDate(signal); // convert raw signal time string to ISO date (and adjust timezone)
 
-				let enterPosition = await _enterPositionOnSignal(signal, 5).catch((error) => {
-					if (error !== `Warning`) {
+				let enterPosition = await _enterPositionOnSignal(signal, settings.trade.enter_position_retries).catch((error) => {
+					if (error !== `warn`) {
 						logger.warn(`Could not enter position because: ${error}`);
 					}
 				});
 
 				if (enterPosition) {
-					logger.info(`Enter position for new signal success`);
+					logger.info(`Success entering new position on signal`);
 				}
 
 				lastSignalHash = signalHash;

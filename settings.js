@@ -25,6 +25,7 @@ const settings = {
 		active_exchanges : ['bittrex'], //, 'binance'],
 		strategy : ['mh_signals'], // , 'rsi'],
 		coin_blacklist : ['VOX', 'CHAT'],
+		enter_position_retries : 5,
 
 		// Stop Loss strategy
 		stop_loss_enabled : true,  // when enabled:
