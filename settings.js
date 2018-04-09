@@ -22,23 +22,30 @@ const settings = {
 
 	trade : {
 		simulated_trading : true, // if true no real buy/sells will happen
+		simulated_balance : {
+			bittrex : {
+				btc: 0.5,
+				eth: 0,
+				usdt: 0
+			},
+		},
 		active_exchanges : ['bittrex'], //, 'binance'],
-		strategy : ['mh_signals'], // , 'rsi'],
 		coin_blacklist : ['VOX', 'CHAT'],
 		enter_position_retries : 5,
+
+		// positions strategy for signals
+		strategy : ['mh_signals'], // , 'rsi'],
+		sell_signal_at_profit : true, // sell signal at profit, if true sell when reaches this profit, else use trailing stop_loss (trailing_stop_loss_enabled must be enabled)
+		sell_at_profit_percentage : 3, // sell when coin reaches 3% gain
+		buy_signal_above_max_percentage: 0.5, // buy coin for up to X percent above signal price
 
 		// Stop Loss strategy
 		stop_loss_enabled : true,  // when enabled:
 		stop_loss_percentage : 16, // if position drops by X percent sell it immediately
-
 		trailing_stop_loss_enabled : false, // sell_signal_at_profit will take precedence over this setting
 		trailing_stop_loss_arm_percentage : 1,  // rise by Y percent to arm the trailing stop loss mechanism
 		trailing_stop_loss_percentage : 3, // after position has risen by Y percent (above) and drops by X (this) percent, sell it
 
-		// positions strategy for signals
-		sell_signal_at_profit : true, // sell signal at profit, if true sell when reaches this profit, else use trailing stop_loss (trailing_stop_loss_enabled must be enabled)
-		sell_at_profit_percentage : 3, // sell when coin reaches 3% gain
-		buy_signal_above_max_percentage: 0.5, // buy coin for up to X percent above signal price
 
 		// signal positions timing
 		max_signal_time_diff_to_buy : 180, // max time that elapsed since the signal to trigger a buy (seconds) - after that signal is ignored
