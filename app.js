@@ -48,7 +48,7 @@ async function _enterPositionOnSignal(signal, retryCounter) {
 
 	if (enterPosition) {
 		logger.info(`Create new position for signal success`);
-		return Promose.resolve(true);
+		return Promise.resolve(true);
 	}
 
 
