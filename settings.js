@@ -80,8 +80,8 @@ const settings = {
 
 		polling_interval : 10, // 30 is ok
 		signal_time_signature_utc_diff_string : 'UTC+0200',
-		halt_signals_if_btc_change_hour : 5.0, // ignore signals if BTC moved > 5% in one hour
-		halt_signals_if_btc_change_day : 9.8, // ignore signals if BTC moved > 10% in 24 hours
+		halt_signals_if_btc_change_hour_percentage : 5.0, // ignore signals if BTC moved > 5% in one hour
+		halt_signals_if_btc_change_day_percentage : 10.0, // ignore signals if BTC moved > 10% in 24 hours
 		check_btc_change_every : 1*60,
 
 
