@@ -28,9 +28,10 @@ const settings = {
 				eth: 0,
 				usdt: 0
 			},
+			binance : {}
 		},
 		active_exchanges : ['bittrex'], //, 'binance'],
-		coin_blacklist : ['VOX', 'CHAT'],
+		coin_blacklist : [], //['VOX', 'CHAT'],
 		enter_position_retries : 5,
 
 		// positions strategy for signals
@@ -77,8 +78,12 @@ const settings = {
 		base_url : 'https://mininghamster.com/api/v2/',
 		api_key : process.env.MININGHAMSTER_API_KEY,
 
-		polling_interval : 5, // 30 is ok
-		signal_time_signature_utc_diff_string : 'UTC+0200', // todo; check if 2 = ISR, 1 = US always or daylight saving time etc
+		polling_interval : 10, // 30 is ok
+		signal_time_signature_utc_diff_string : 'UTC+0200',
+		halt_signals_if_btc_change_hour : 5.0, // ignore signals if BTC moved > 5% in one hour
+		halt_signals_if_btc_change_day : 9.8, // ignore signals if BTC moved > 10% in 24 hours
+		check_btc_change_every : 1*60,
+
 
 		// buy_signal_condition with TA
 		// ..
