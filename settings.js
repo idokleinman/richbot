@@ -13,7 +13,7 @@ const settings = {
 	bittrex : {
 		api_key : process.env.BITTREX_API_KEY,
 		api_secret : process.env.BITTREX_API_SECRET,
-		polling_interval : 10,
+		polling_interval : 12, // poll positions/orders on bittrex every x seconds
 	},
 
 	report : {
@@ -30,12 +30,12 @@ const settings = {
 			},
 			binance : {}
 		},
-		active_exchanges : ['bittrex'], //, 'binance'],
+		active_exchanges : ['bittrex'], //, 'binance'], // which exchanges to trade on
 		coin_blacklist : [], //['VOX', 'CHAT'],
-		enter_position_retries : 5,
+		enter_position_retries : 5, // maxiumum tries to enter a position on a signal
 
 		// positions strategy for signals
-		strategy : ['mh_signals'], // , 'rsi'],
+		strategy : ['mh_signals'], // , 'rsi'], // currently the only strategy - setting ignored
 		sell_signal_at_profit : true, // sell signal at profit, if true sell when reaches this profit, else use trailing stop_loss (trailing_stop_loss_enabled must be enabled)
 		sell_at_profit_percentage : 3, // sell when coin reaches 3% gain
 		buy_signal_above_max_percentage: 0.5, // buy coin for up to X percent above signal price
@@ -82,7 +82,7 @@ const settings = {
 		signal_time_signature_utc_diff_string : 'UTC+0200',
 		halt_signals_if_btc_change_hour_percentage : 5.0, // ignore signals if BTC moved > 5% in one hour
 		halt_signals_if_btc_change_day_percentage : 10.0, // ignore signals if BTC moved > 10% in 24 hours
-		check_btc_change_every : 1*60,
+		check_btc_change_every : 5*60, // check BTC price swing every ? seconds
 
 
 		// buy_signal_condition with TA
